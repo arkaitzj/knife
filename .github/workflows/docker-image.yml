@@ -27,7 +27,7 @@ jobs:
         push: true
         platforms: linux/amd64,linux/arm64
         tags: |
-          arkaitzj/knife:$TIMESTAMP_TAG
-          ghcr.io/arkaitz/knife:$TIMESTAMP_TAG
+          arkaitzj/knife:${{ env.TIMESTAMP_TAG }}
+          ghcr.io/arkaitz/knife:${{ env.TIMESTAMP_TAG }}
       
       
