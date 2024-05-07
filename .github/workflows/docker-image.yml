@@ -20,6 +20,10 @@ jobs:
       uses: docker/build-push-action@v5.3.0
       with:
         push: true
-        tags: arkaitzj/knife
+        images: |
+          arkaitzj/knife
+          ghcr.io/arkaitz/knife
+        tags: |
+          $(date +%s)
       
       
