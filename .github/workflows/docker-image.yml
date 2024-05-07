@@ -19,8 +19,8 @@ jobs:
       run: docker build .
     - name: "Set vars"
       run: echo "TIMESTAMP_TAG=$(date +%s)" >> $GITHUB_ENV
-    - name: Show the timestamp tag
-      run: echo $TIMESTAMP_TAG
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
     - name: Push image to repositories
       uses: docker/build-push-action@v5.3.0
       with:
