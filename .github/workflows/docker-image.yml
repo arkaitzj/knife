@@ -39,6 +39,10 @@ jobs:
           arkaitzj/knife:${{ env.TIMESTAMP_TAG }}
           ghcr.io/arkaitz/knife:${{ env.TIMESTAMP_TAG }}
         cache-from: |
-          type=registry,ref=arkaitzj/knife:latest
+          type=registry,ref=arkaitzj/knife:main-latest
+          type=registry,ref=arkaitzj/knife:${{ github.ref_name }}-latest
+        cache-to: |
+          type=registry,ref=arkaitzj/knife:${{ github.ref_name }}-latest,mode=max
+
       
       
