@@ -11,7 +11,8 @@ jobs:
   build:
     env:
       BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
-
+    permissions:
+      packages: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
