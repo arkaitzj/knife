@@ -16,3 +16,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag arkaitzj/knife:$(date +%s)
+    - name: Push image to repositories
+      uses: docker/build-push-action@v5.3.0
+      with:
+        push: true
+        tags: arkaitzj/knife ghcr.io/arkaitzj/knife
+      
+      
