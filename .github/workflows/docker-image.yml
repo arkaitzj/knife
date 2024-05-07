@@ -38,5 +38,7 @@ jobs:
         tags: |
           arkaitzj/knife:${{ env.TIMESTAMP_TAG }}
           ghcr.io/arkaitz/knife:${{ env.TIMESTAMP_TAG }}
+        cache-from: |
+          type=registry,ref=arkaitzj/knife:latest
       
       
