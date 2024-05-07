@@ -15,8 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build and test the Docker image
-      run: docker build .
     - name: "Set vars"
       run: echo "TIMESTAMP_TAG=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
     - name: Set up Docker Buildx
@@ -39,7 +37,6 @@ jobs:
         platforms: linux/amd64,linux/arm64
         tags: |
           arkaitzj/knife:${{ env.TIMESTAMP_TAG }}
-          ghcr.io/arkaitz/knife:${{ env.TIMESTAMP_TAG }}
         cache-from: |
           type=registry,ref=arkaitzj/knife:main-latest
           type=registry,ref=arkaitzj/knife:${{ env.BRANCH_NAME }}-latest
