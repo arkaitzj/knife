@@ -9,6 +9,8 @@ on:
 jobs:
 
   build:
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
 
     runs-on: ubuntu-latest
     steps:
@@ -40,9 +42,9 @@ jobs:
           ghcr.io/arkaitz/knife:${{ env.TIMESTAMP_TAG }}
         cache-from: |
           type=registry,ref=arkaitzj/knife:main-latest
-          type=registry,ref=arkaitzj/knife:${{ github.ref_name }}-latest
+          type=registry,ref=arkaitzj/knife:${{ env.BRANCH_NAME }}-latest
         cache-to: |
-          type=registry,ref=arkaitzj/knife:${{ github.ref_name }}-latest,mode=max
+          type=registry,ref=arkaitzj/knife:${{ env.BRANCH_NAME }}-latest,mode=max
 
       
       
