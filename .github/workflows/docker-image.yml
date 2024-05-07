@@ -11,11 +11,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      TIMESTAMP_TAG: $(date +%s)
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag arkaitzj/knife:$(date +%s)
+    - name: Build and test the Docker image
+      run: docker build .
     - name: Push image to repositories
       uses: docker/build-push-action@v5.3.0
       with:
@@ -24,6 +25,6 @@ jobs:
           arkaitzj/knife
           ghcr.io/arkaitz/knife
         tags: |
-          $(date +%s)
+          $TIMESTAMP_TAG
       
       
