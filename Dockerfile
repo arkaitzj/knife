@@ -1,19 +1,13 @@
-FROM golang:1.18.2-alpine3.15 as golang-builder
+FROM alpine:latest as knife
 
-RUN apk update \
-    && apk add --virtual build-dependencies git \
-    && apk add bash curl jq
-RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
-
-
-FROM alpine:3.15 as knife
-
-RUN apk add bind-tools curl tcpdump mysql-client iproute2 aws-cli
+RUN apk add bash bind-tools curl tcpdump mysql-client iproute2 aws-cli
 
 WORKDIR /root
 
-ENV PATH="${PATH}:/root/usr/bin"
-RUN mkdir -p usr/bin
+# Copy binaries
+COPY --from=fullstorydev/grpcurl:latest-alpine /bin/grpcurl /usr/bin/
+COPY --from=mccutchen/go-httpbin /bin/go-httpbin /usr/bin/
+# Ensure binaries
+RUN which grpcurl go-httpbin
 
-COPY --from=golang-builder /go/bin/grpcurl usr/bin/
-
+CMD "go-httpbin"
